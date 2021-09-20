@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://cdn.jsdelivr.net/npm/froala-editor@latest/css/froala_editor.pkgd.min.css" rel="stylesheet" type="text/css" />
+		<link rel="stylesheet" href="/style.css" />
+
+    <title>Create Blog | Cf-Contest</title>
+</head>
+
+<body>    
+  <section class="page-wrap">
+    <div style="float: left; font-weight: 600; font-size: 20px;">
+      <br>
+      <a href="/home">&laquo; Back</a>
+    </div>
+
+    <header>
+      <%-include('./partials/headbar.ejs')%>				
+      
+    </header>
+    <form class="createblog" action="/blogs/create" method="POST">
+        <div>
+          <label for="title" class="form-label">Blog title:</label>
+          <br>
+          <input type="text" id="title" name="title" required>
+        </div>        
+        
+        <br>
+
+        <div>
+          <label for="name">Author Name:</label>
+          <br>
+          <input type="text" id="name" name="author" required>
+        </div>
+
+        <br>
+
+        <div>
+          <label for="blogType">Blog type:</label>
+          <br>
+          <input type="text" id="blogType" name="type" required>
+        </div>
+
+        <br>
+
+        <div>
+          <label for="detail">Blog body:</label>
+          <br>
+          <textarea id="detail" name="detail" required></textarea>
+        </div>
+
+        <br>
+        <div style="text-align: center;">
+          <button class="button">Submit</button>
+        </div>
+  </form>
+  <br>
+		</section>
+</body>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/froala-editor@latest/js/froala_editor.pkgd.min.js"></script>
+
+<script>
+  new FroalaEditor('textarea');
+</script>
+
+</body>
+</html>

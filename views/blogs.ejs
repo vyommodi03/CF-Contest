@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title><%=title%></title>
+		<link rel="stylesheet" href="/style.css" />
+	</head>
+
+	<body>
+		<section class="page-wrap">
+			<div style="float: left; font-weight: 600; font-size: 20px;">
+				<br>
+				<a href="/home">&laquo; Back</a>
+			</div>
+			<header>
+				<%-include('./partials/headbar.ejs')%>
+			</header>
+
+			<% blogs.forEach((blog,index) => { %>
+				<a href="/blogs/<%=blog._id%>" class="question-block" id = '<%=index%>'>
+
+					<h4> Blog No:- <%=index+1%></h4>
+                    <h3 style="text-align: center;
+                    font-family: Apple Chancery, cursive; 
+                    font-weight: bold;
+                    color: black;
+                    "><%=blog.title%></h3>
+
+                    <div style="float: left; width: 300px; color: black;">
+                        Date:-<h4><%=blog.date.dt%>-<%=blog.date.mnt%>-<%=blog.date.year%></h4>
+                    </div>
+                 
+                    <h4 style="
+                        color:rgb(67, 67, 197);
+                        text-align: right;
+                        ">Author:-<%=blog.author%> 
+                    </h4>
+                    <br>
+                    <div class="tags" style="text-align: right;">
+                        <div class="broker-tag"><%=blog.type%></div>
+                    </div>
+				</a>
+			<% }); %>
+			<% if(!blogs.length){%>
+			<div class="page-wrap">
+				<a href="/home" class="question-block">
+					<h3> There is no blog currently available.</h3>
+				</a>
+			</div>
+			<%}%>
+	</body>
+</html>

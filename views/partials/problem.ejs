@@ -1,0 +1,18 @@
+<%-body %>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>
+	(function () {
+		const q1 = document.getElementsByClassName("problemindexholder")[0];
+		document.body.appendChild(q1);
+
+		document.getElementById("body").childNodes.forEach((ele) => {
+				if (ele.style && ele.className!="problemindexholder") {
+					ele.style.display = "none";
+				}
+			});
+        $('.problemindexholder').addClass('module-block')
+		var tmp = document.getElementsByClassName("title")[0].innerHTML;
+		document.getElementsByClassName("title")[0].innerHTML = tmp.slice(2);
+		document.querySelector("title").innerHTML = "CF-contest";
+	})();
+</script>

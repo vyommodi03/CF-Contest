@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="/style.css" />
+    <title>
+        <%=title%>
+    </title>
+</head>
+
+<body>
+    <section style="
+            margin-left: 8%;
+        	max-width: 80%;
+            margin-bottom: 3%;
+        ">
+        <div style="float: left; font-weight: 600; font-size: 20px;">
+            <br>
+    			<a href="/blogs">&laquo; Back</a>
+		</div>
+        <header>
+            <%-include('./partials/headbar.ejs')%>
+        </header>
+        <div class="question-block" style="
+            width:110%;
+            margin: 0%;
+            ">
+            <h1 style="text-align: center;
+                font-family: Apple Chancery, cursive; 
+                font-weight: 600;
+                ">
+                <%=blog.title%>
+            </h1>
+            
+            <div style="display: block;">            
+                <a class="delete" style="text-align: left;" data-doc="<%=blog._id%>" >
+                    <div class="btn btn-danger btn-lg">delete</div>
+                </a>
+                <br>
+
+                <h3 style="
+                    text-align: right;
+                    color: rgb(67, 67, 197);
+                    ">Author:- <%=blog.author%>
+                </h3>
+            </div>
+            <div class="tags">
+                <div class="broker-tag">
+                    <%=blog.type%>
+                </div>
+            </div>
+            <%-blog.detail%>
+                <div>
+                </div>
+        </div>
+</body>
+
+<script>
+	const deleteID = document.querySelector('.delete');
+	deleteID.addEventListener('click',(e)=>{
+		const endpoint =`/blogs/${deleteID.dataset.doc}`;
+        console.log(endpoint)
+		fetch(endpoint,{
+			method : 'DELETE'
+		})
+		.then(results=> results.json())
+		.then(data =>window.location.href = data.redirect)
+		.catch(err=>console.log(err));
+	})
+</script>
+
+</html>

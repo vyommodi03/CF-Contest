@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title><%=title%></title>
+		<link rel="stylesheet" href="/style.css" />
+		<link rel="shortcut icon" href="favicon.ico">
+	</head>
+
+	<body>
+		<%- include('./partials/flashmsg.ejs') %> 
+		<section class="page-wrap">
+			<header>
+				<%-include('./partials/headbar.ejs')%>
+			</header>
+			<div class="right">
+				<h3>Handle :- <%= CFuser.handle %></h3>
+			</div>
+		
+			<div style="color: rgb(67, 67, 197);">
+				<h3><%= CFuser.firstName %> <%= CFuser.lastName %></h3>
+			</div>
+
+			<br>
+			<article id="block1" class="module-block">
+				<div style="text-align: center; font-style: italic;">
+					<h2>Give your Contest</h2>
+				</div>
+
+				<div>
+					<h3>Contest</h3>
+					<p>Duration : 01:30 </p>
+					<p>It contains 3 Questions in increasing difficulty level. You have 1 hour and 30 minutes to solve them.</p>
+					<div>
+						<h4></p>Points</h4>					
+						<p>1st Question : 50 Point</p>
+						<p>2nd Question : 75 Point</p>
+						<p>3rd Question : 100 Point</p>
+					</div>
+				</div>
+				<div style="text-align: center;">
+					<button type="submit" id="newContest" class="button">Enter Contest</button>
+				</div>
+			</article>
+			<a href="/allContest" class="question-block" style="text-align: center;">
+				<h3>Click here... to view your all Contests.</h3>
+			</a>
+	</body>
+	<script> 
+			document.querySelector("#newContest").addEventListener('click',async (e)=>{
+				location.assign('/contest');
+		});
+
+	</script>
+</html>

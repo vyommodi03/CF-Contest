@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title><%=title%></title>
+		<link rel="stylesheet" href="/style.css" />
+	</head>
+
+	<body>
+		<section class="page-wrap">
+			<div style="float: left; font-weight: 600; font-size: 20px;">
+				<br>
+				<a href="/allContest">&laquo; Back</a>
+			</div>
+			<header>
+				<%-include('./partials/headbar.ejs')%>
+			</header>
+            <div style="float: right; text-align: right; color: rgb(0, 0, 0)">
+                <br>
+                <h3> Date:- <%=contest.Questions.date %></h3>
+            </div>
+            <br>
+
+            <div>
+                <h3 style="color: rgb(67, 67, 197); font-size: 45px; margin-left: 30px;">Contest:- <%=contest.id%></h3>
+            </div>
+			<a
+				href="<%=contest.Questions.QuestionA.link%>"
+				target="_blank"
+				class="question-block"
+				<% if(contest.Questions.QuestionA.correct){%>
+					style="background-color: rgb(125, 255, 65);"
+				<%}%>
+			>
+				<h3>A. <%=contest.Questions.QuestionA.name%></h3>
+                <h4 style="color: rgb(67, 67, 197);"> Rating:- <%=contest.Questions.QuestionA.rating%>  </h4>
+			</a>
+			<a
+				href="<%=contest.Questions.QuestionB.link%>"
+				target="_blank"
+				class="question-block"
+				<% if(contest.Questions.QuestionB.correct){%>
+					style="background-color: rgb(125, 255, 65);"
+				<%}%>
+
+			>
+				<h3>B. <%=contest.Questions.QuestionB.name%></h3>
+                <h4 style="color: rgb(67, 67, 197);"> Rating:- <%=contest.Questions.QuestionB.rating%>  </h4>
+
+			</a>
+			<a
+				href="<%=contest.Questions.QuestionC.link%>"
+				target="_blank"
+				class="question-block"
+				<% if(contest.Questions.QuestionC.correct){%>
+					style="background-color: rgb(125, 255, 65);"
+				<%}%>
+
+			>
+				<h3>C. <%=contest.Questions.QuestionC.name%></h3>
+                <h4 style="color: rgb(67, 67, 197);"> Rating:- <%=contest.Questions.QuestionC.rating%>  </h4>
+
+			</a>
+		</section>
+	</body>
+</html>

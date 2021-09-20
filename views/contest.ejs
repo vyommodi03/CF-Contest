@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title><%=title%></title>
+		<link rel="stylesheet" href="/style.css" />
+	</head>
+
+	<body>
+		<section class="page-wrap">
+			<div style="float: left; font-weight: 600; font-size: 20px;">
+				<br>
+				<a href="/home">&laquo; Back</a>
+			</div>
+
+			<header>
+				<%-include('./partials/headbar.ejs')%>				
+				
+			</header>
+			<div class="clock" id="clock">
+				<div class="digits" style="display: flex; flex-direction: row">
+					<h1 class="time-output" id="hours">00</h1>
+					<h1 class="colon" id="colon-one">:</h1>
+					<h1 class="time-output" id="minutes">00</h1>
+					<h1 class="colon" id="colon-two">:</h1>
+					<h1 class="time-output" id="seconds">00</h1>
+					<h1 class="time-end" id="end"></h1>
+				</div>
+			</div>
+			<div style="text-align: left">
+				<h3 style="font-size:xxx-large; font-weight: 500; color: rgb(67, 67, 197);"><%= CFuser.firstName %> <%= CFuser.lastName %></h3>
+			</div>
+			<br>
+			<div style="margin-left: 40px;">
+				<h3 style="font-size: 40px; color: #d24655;">Questions</h3>
+			</div>
+			<a
+				href="<%=question.QuestionA.link%>"
+				target="_blank"
+				class="question-block"
+			>
+				<h3>A. <%=question.QuestionA.name%></h3>
+				<h4 class="right" style="color: rgb(67, 67, 197);">Points : 50</h4>
+			</a>
+			<a
+				href="<%=question.QuestionB.link%>"
+				target="_blank"
+				class="question-block"
+			>
+				<h3>B. <%=question.QuestionB.name%></h3>
+				<h4 class="right" style="color: rgb(67, 67, 197);">Points : 75</h4>
+			</a>
+			<a
+				href="<%=question.QuestionC.link%>"
+				target="_blank"
+				class="question-block"
+			>
+				<h3>C. <%=question.QuestionC.name%></h3>
+				<h4 class="right" style="color: rgb(67, 67, 197);">Points : 100</h4>
+			</a>
+		</section>
+		<footer>
+			<h3 style="text-align: center; font-weight: 600;">Note:- You can move. The timer does not stop.</h3>
+		</footer>
+		<script>
+			const duration = 90 * 60 * 1000;
+
+			function timerFunc() {
+				setTimeout(() => {
+					alert("Contest Over");
+					location.assign("/home");
+				}, Math.max(duration - (Date.now() - parseInt("<%=question.time%>")), 0));
+				var x = setInterval(() => {
+					let now = Date.now();
+
+					let distance = duration - (now - parseInt("<%=question.time%>"));
+					let hour = 60 * 60 * 1000;
+					let minute = 60 * 1000;
+					let second = 1000;
+					(document.getElementById("hours").innerText = (
+						"0" + Math.max(Math.floor(distance / hour), 0)
+					).slice(-2)),
+						(document.getElementById("minutes").innerText = (
+							"0" + Math.max(Math.floor((distance % hour) / minute), 0)
+						).slice(-2)),
+						(document.getElementById("seconds").innerText = (
+							"0" + Math.max(Math.floor((distance % minute) / second), 0)
+						).slice(-2));
+
+					if (distance <= 0) {
+						clearInterval(x);
+					}
+				}, 0);
+			}
+			window.onload = timerFunc;
+		</script>
+	</body>
+</html>

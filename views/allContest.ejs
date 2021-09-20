@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title><%=title%></title>
+		<link rel="stylesheet" href="/style.css" />
+	</head>
+
+	<body>
+		<section class="page-wrap">
+			<div style="float: left; font-weight: 600; font-size: 20px;">
+				<br>
+				<a href="/home">&laquo; Back</a>
+			</div>
+			<header>
+				<%-include('./partials/headbar.ejs')%>
+			</header>
+			<div class="right">
+				<h3>Handle :- <%= CFuser.handle %></h3>
+			</div>
+		
+			<div style="color: rgb(67, 67, 197);">
+				<h3><%= CFuser.firstName %> <%= CFuser.lastName %></h3>
+			</div>
+			<br>
+
+			<% allContest.forEach((contest,index) => { %>
+				<a href="/allContest/<%=index%>" class="question-block" id = '<%=index%>'>
+					<h2 > Contest:- <%=index+1%></h2>
+					<div style="float: right; width: 250px; color: black;">
+						Date:-
+						<h4>  <%=contest.Questions.date %> </h4>
+					</div>
+					<div style=" margin-left: 50px; color: rgb(67, 67, 197);">
+						<h4>1. <%=contest.Questions.QuestionA.name%></h4>
+						<h4>2. <%=contest.Questions.QuestionB.name%></h4>
+						<h4>3. <%=contest.Questions.QuestionC.name%></h4>	
+					</div>
+				</a>
+			<% }) %>
+			<% if(!allContest[0]){%>
+			<a href="/home" class="question-block">
+				<h3> You did not give any contest till now.</h3>
+			</a>
+			<%}%>
+	</body>
+</html>

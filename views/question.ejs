@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title><%=title%></title>
+		<link rel="stylesheet" href="/style.css" />
+	</head>
+
+	<body>
+		<section class="page-wrap">
+			<header>
+				<%-include('./partials/headbar.ejs')%>
+			</header>
+
+			<%-include("./partials/problem.ejs")%>
+		</section>
+		<section style="text-align: center">
+			<a
+				href="<%-url%>"
+				target="_blank"
+				type="button"
+				style="
+					display: inline-block;
+					border-radius: 4px;
+					background-color: #0090e4;
+					border: none;
+					color: #ffffff;
+					text-align: center;
+					font-size: 28px;
+					padding: 20px;
+					width: 200px;
+					transition: all 0.5s;
+					cursor: pointer;
+					margin-bottom: 100px;
+				"
+			>
+				Submit
+			</a>
+		</section>
+	</body>
+</html>

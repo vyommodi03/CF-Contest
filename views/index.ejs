@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  
+    <meta charset="utf-8">
+		
+		<title><%-title%></title>
+		<link rel="shortcut icon" href="#">
+		<meta name="description" content="Description of site" /> 
+		<link rel="stylesheet" href="/style.css" />
+
+	</head>
+	
+	<body>
+		<%-include("./partials/flashmsg.ejs")%>
+		<section class="page-wrap">	
+			<header> 
+				<div class="split right">
+					<h1>SignUp</h1>
+					<br>
+					<hr>
+					<div>
+						<a href="/signup" class="button"> Signup </a>
+					</div>
+				</div>
+
+				<div class="split left">  
+					<form method="POST" style="text-align: left">
+						<h1>Log in</h1>
+						<br>
+						<hr>
+
+						<h2 for="user" style="margin-top: 40px" class="form-label">
+							Enter username
+						</h2>
+						<input
+							type="text"
+							placeholder="Enter username"
+							name="username"
+							required
+						/>
+						<div class="username error"><br></div>
+						<br>
+						<br />
+						<h2 for="password" style="margin-top: 40px" class="form-label">
+							Enter Password
+						</h2>
+						<input
+							type="password"
+							placeholder="Enter Password"
+							name="password"
+							required
+						/>
+						<div class="password error"></div>
+						<br >
+						<div class="buttons">
+							<button type="submit" class="button">Submit</button>
+						</div>
+					</form>
+				</div>
+			</header>
+
+	  
+			<article id="block1" class="module-block">
+			
+				<h2>About</h2>
+				
+				<p>
+					In this Platform you can give contest of codeforces <strong>unsolved</strong> questions.
+				</p>
+				<p>
+					You first need to register yourself using signup button in this you have to give your Codeforces Handle and you can set username and password whatever you want but after registration you have to use that username and password for login.
+				</p>
+				<p>
+					In home page by clicking Enter contest it will generate contest of 3 questions by increasing level of their difficulty.
+				</p>
+				<p>
+					Difficulty level of questions
+					<ul>
+						<li>1st question:- 900 - 1200 rating</li>
+						<li>2nd question:- 1300 - 1500 rating</li>
+						<li>3rd question:- 1600 - 1900 rating</li>
+					</ul> 
+				</p>
+			<p>You have 1 hour and 30 minutes to solve this question. In this period you can move wherever you want. You have to submit solution on codeforces website.</p>
+			<p> After contest over you can access that contest in contests section.</p>
+				<ul class="social" >
+
+					<li>
+						<a href="https://github.com/vyommodi03/CF-Contest.git">
+							Github Link
+						  </a>	
+					</li>
+					<li><a href="https://github.com/vyommodi03/CF-Contest.git"><svg xmlns="http://www.w3.org/2000/svg" color="black" width="30" height="30" fill="currentColor" class="bi bi-github" viewBox="0 0 16 16">
+						<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+					  </svg></a>
+					</li>				
+				</ul>
+				
+			</article>
+		<script>
+				const form = document.querySelector("form");
+				const usernameError = document.querySelector(".username.error");
+				const passwordError = document.querySelector(".password.error");
+		
+				form.addEventListener("submit",async (e) => {
+					e.preventDefault();
+
+					usernameError.textContent = '';
+					passwordError.textContent = '';
+
+				const username = form.username.value;
+				const password = form.password.value;
+
+
+			try {
+				const res = await fetch("/", {
+					method: "POST",
+					body: JSON.stringify({ username, password }),
+					headers: { "Content-Type": "application/json" },
+				});
+
+				const data = await res.json();
+				console.log(data);
+				if (data.errors) {
+					usernameError.textContent = data.errors.username;
+					passwordError.textContent = data.errors.password;
+				}
+				if(data.user){
+					location.assign('/home');
+				}
+			} catch (err) {
+				console.log(err);
+			}
+				});
+		</script>
+	</body>
+</html>
